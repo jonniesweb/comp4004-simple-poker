@@ -39,6 +39,10 @@ public class Card {
 		
 	}
 	
+	public Card(String string) {
+		throw new UnsupportedOperationException();
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Card)) {
