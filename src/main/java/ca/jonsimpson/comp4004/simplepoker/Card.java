@@ -38,5 +38,15 @@ public class Card {
 		this.suit = suit;
 		
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Card)) {
+			return false;
+		}
+		
+		Card card = (Card) obj;
+		return card.rank.equals(rank) && card.suit.equals(suit);
+	}
 
 }
