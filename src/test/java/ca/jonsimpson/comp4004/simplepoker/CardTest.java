@@ -8,6 +8,8 @@ import java.util.Set;
 import org.junit.Test;
 
 import ca.jonsimpson.comp4004.simplepoker.Card;
+import ca.jonsimpson.comp4004.simplepoker.Card.Suit;
+import ca.jonsimpson.comp4004.simplepoker.Card.Rank;
 import ca.jonsimpson.comp4004.simplepoker.GameCards;
 
 public class CardTest {
@@ -31,6 +33,21 @@ public class CardTest {
 		}
 		
 		assertEquals(52, cardCount);
+	}
+	
+	@Test(expected = InvalidCardException.class)
+	public void testCreateCardWithNullSuit() throws Exception {
+		new Card(Rank.ACE, null);
+	}
+	
+	@Test(expected = InvalidCardException.class)
+	public void testCreateCardWithNullValue() throws Exception {
+		new Card(null, Suit.CLUB);
+	}
+	
+	@Test(expected = InvalidCardException.class)
+	public void testCreateCardWithBothNull() throws Exception {
+		new Card(null, null);
 	}
 	
 }
