@@ -53,4 +53,19 @@ public class CardTest {
 		assertEquals(new Card("AS"), new Card(Rank.ACE, Suit.SPADE));
 	}
 	
+	@Test(expected = NullPointerException.class)
+	public void testCreateCardWithNullRankSuit() throws Exception {
+		new Card(null);
+	}
+	
+	@Test(expected = InvalidCardException.class)
+	public void testCreateCardRankSuitInvalidShortLength() throws Exception {
+		new Card("S");
+	}
+	
+	@Test(expected = InvalidCardException.class)
+	public void testCreateCardRankSuitInvalidLongLength() throws Exception {
+		new Card("10DD");
+	}
+	
 }
