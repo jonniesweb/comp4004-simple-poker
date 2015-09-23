@@ -17,15 +17,26 @@ public class Card {
 		TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
 	};
 	
-	private Suit suit;
-	private Rank rank;
+	private final Suit suit;
+	private final Rank rank;
+	
 	/**
 	 * @param rank
 	 * @param suit
 	 */
 	public Card(Rank rank, Suit suit) {
-		throw new UnsupportedOperationException();
+		
+		// check for invalid rank or suit
+		if (rank == null) {
+			throw new InvalidCardException("rank cannot be null");
+		} else if (suit == null) {
+			throw new InvalidCardException("suit cannot be null");
+		}
+		
+		// everything's ok, set the values
+		this.rank = rank;
+		this.suit = suit;
+		
 	}
-	
-	
+
 }
