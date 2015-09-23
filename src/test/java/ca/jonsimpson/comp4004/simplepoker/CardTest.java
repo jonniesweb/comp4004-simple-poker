@@ -15,7 +15,7 @@ import ca.jonsimpson.comp4004.simplepoker.GameCards;
 public class CardTest {
 	@Test
 	public void testNoDuplicateCards() throws Exception {
-		GameCards cards = new GameCards();
+		GameCards cards = GameCards.getFullDeck();
 		
 		Set<Card> cardSet = new HashSet<Card>(cards);
 		
@@ -24,7 +24,7 @@ public class CardTest {
 	
 	@Test
 	public void testHave52Cards() throws Exception {
-		GameCards cards = new GameCards();
+		GameCards cards = GameCards.getFullDeck();
 		
 		int cardCount = 0;
 		
