@@ -50,4 +50,14 @@ public class CardTest {
 		new Card(null, null);
 	}
 	
+	@Test
+	public void testCardsEqual() throws Exception {
+		assertTrue(new Card(Rank.ACE, Suit.CLUB).equals(new Card(Rank.ACE, Suit.CLUB)));
+	}
+	
+	@Test
+	public void testCardsNotEqual() throws Exception {
+		assertFalse(new Card(Rank.ACE, Suit.CLUB).equals(new Card(Rank.ACE, Suit.SPADE)));
+	}
+	
 }
