@@ -40,15 +40,15 @@ public class CardTest {
 		
 		assertEquals(new Card("2C"), new Card(Rank.TWO, Suit.CLUB));
 		assertEquals(new Card("3C"), new Card(Rank.THREE, Suit.CLUB));
-		assertEquals(new Card("4C"), new Card(Rank.FOUR, Suit.HEART));
-		assertEquals(new Card("5C"), new Card(Rank.FIVE, Suit.DIAMOND));
-		assertEquals(new Card("6C"), new Card(Rank.SIX, Suit.SPADE));
+		assertEquals(new Card("4H"), new Card(Rank.FOUR, Suit.HEART));
+		assertEquals(new Card("5D"), new Card(Rank.FIVE, Suit.DIAMOND));
+		assertEquals(new Card("6S"), new Card(Rank.SIX, Suit.SPADE));
 		assertEquals(new Card("7C"), new Card(Rank.SEVEN, Suit.CLUB));
-		assertEquals(new Card("8C"), new Card(Rank.EIGHT, Suit.HEART));
-		assertEquals(new Card("9C"), new Card(Rank.NINE, Suit.DIAMOND));
-		assertEquals(new Card("10C"), new Card(Rank.TEN, Suit.SPADE));
-		assertEquals(new Card("JC"), new Card(Rank.FOUR, Suit.CLUB));
-		assertEquals(new Card("QC"), new Card(Rank.FOUR, Suit.HEART));
+		assertEquals(new Card("8H"), new Card(Rank.EIGHT, Suit.HEART));
+		assertEquals(new Card("9D"), new Card(Rank.NINE, Suit.DIAMOND));
+		assertEquals(new Card("10S"), new Card(Rank.TEN, Suit.SPADE));
+		assertEquals(new Card("JC"), new Card(Rank.JACK, Suit.CLUB));
+		assertEquals(new Card("QH"), new Card(Rank.QUEEN, Suit.HEART));
 		assertEquals(new Card("KD"), new Card(Rank.KING, Suit.DIAMOND));
 		assertEquals(new Card("AS"), new Card(Rank.ACE, Suit.SPADE));
 	}
