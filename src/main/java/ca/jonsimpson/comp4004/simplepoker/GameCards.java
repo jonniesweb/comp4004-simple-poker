@@ -11,7 +11,7 @@ import ca.jonsimpson.comp4004.simplepoker.Card.Suit;
 /**
  * A representation of a set of playing cards. Does not contain duplicate cards.
  */
-public class GameCards extends AbstractSet<Card> {
+public class GameCards extends AbstractSet<Card> implements Comparable<GameCards> {
 
 	Set<Card> cards = new HashSet<Card>();
 	
@@ -45,5 +45,10 @@ public class GameCards extends AbstractSet<Card> {
 		}
 		
 		return gameCards;
+	}
+
+	@Override
+	public int compareTo(GameCards o) {
+		throw new UnsupportedOperationException();
 	}
 }

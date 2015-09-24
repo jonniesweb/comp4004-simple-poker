@@ -30,4 +30,26 @@ public class GameCardsTest {
 		
 		assertEquals(52, cardCount);
 	}
+	
+	@Test
+	public void testCompareRoyalFlushToFlush() throws Exception {
+		// create a hand with a royal flush
+		GameCards winnerCards = new GameCards();
+		winnerCards.add(new Card("AH"));
+		winnerCards.add(new Card("KH"));
+		winnerCards.add(new Card("QH"));
+		winnerCards.add(new Card("JH"));
+		winnerCards.add(new Card("10H"));
+		
+		// create a random hand
+		GameCards loserCards = new GameCards();
+		loserCards.add(new Card("2S"));
+		loserCards.add(new Card("3S"));
+		loserCards.add(new Card("4S"));
+		loserCards.add(new Card("5S"));
+		loserCards.add(new Card("10S"));
+		
+		// do the comparison
+		assertEquals(1, winnerCards.compareTo(loserCards));
+	}
 }
