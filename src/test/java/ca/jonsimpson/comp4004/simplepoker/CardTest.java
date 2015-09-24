@@ -68,4 +68,23 @@ public class CardTest {
 		new Card("10DD");
 	}
 	
+	@Test
+	public void testCompareRank() throws Exception {
+		// 2 < 4
+		assertTrue(0 > new Card("2H").compareTo(new Card("4D")));
+		
+		// cards of same rank but different suit are the same
+		assertEquals(0, new Card("4H").compareTo(new Card("4D")));
+		
+		// ace is high
+		assertTrue(0 < new Card("AH").compareTo(new Card("4D")));
+		
+		// same card
+		assertEquals(0, new Card("2D").compareTo(new Card("2D")));
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void testCompareRankNPE() throws Exception {
+		new Card("4D").compareTo(null);
+	}
 }

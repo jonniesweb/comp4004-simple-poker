@@ -1,6 +1,6 @@
 package ca.jonsimpson.comp4004.simplepoker;
 
-public class Card {
+public class Card implements Comparable<Card> {
 	
 	/**
 	 * The suit of this card. Possibilities are Diamond, Heart, Spade and Club.
@@ -115,5 +115,22 @@ public class Card {
 		Card card = (Card) obj;
 		return card.rank.equals(rank) && card.suit.equals(suit);
 	}
-
+	
+	public Suit getSuit() {
+		return suit;
+	}
+	
+	public Rank getRank() {
+		return rank;
+	}
+	
+	/**
+	 * Compare this card with another card by rank. Returns a number less than
+	 * zero, zero or greater than zero for if this card's rank is less than,
+	 * equal or greater than the comparison card.
+	 */
+	@Override
+	public int compareTo(Card card) {
+		return 0;
+	}
 }
