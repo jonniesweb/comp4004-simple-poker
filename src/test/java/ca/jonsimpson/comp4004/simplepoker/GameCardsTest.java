@@ -52,4 +52,17 @@ public class GameCardsTest {
 		// do the comparison
 		assertEquals(1, winnerCards.compareTo(loserCards));
 	}
+	
+	@Test
+	public void testIsRoyalFlush() throws Exception {
+		// create royal flush
+		GameCards royalFlushCards = new GameCards();
+		royalFlushCards.add(new Card("AH"));
+		royalFlushCards.add(new Card("KH"));
+		royalFlushCards.add(new Card("QH"));
+		royalFlushCards.add(new Card("JH"));
+		royalFlushCards.add(new Card("10H"));
+		
+		assertTrue(royalFlushCards.isRoyalFlush());
+	}
 }

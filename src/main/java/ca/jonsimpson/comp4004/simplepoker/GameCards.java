@@ -51,4 +51,18 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 	public int compareTo(GameCards o) {
 		throw new UnsupportedOperationException();
 	}
+
+	/**
+	 * Returns the best five cards that are possible out of the given gameCards.
+	 * 
+	 * @param gameCards
+	 * @return
+	 */
+	private static BestHand determineBestHand(GameCards gameCards) {
+		return null;
+	}
+
+	public boolean isRoyalFlush() {
+		throw new UnsupportedOperationException();
+	}
 }
