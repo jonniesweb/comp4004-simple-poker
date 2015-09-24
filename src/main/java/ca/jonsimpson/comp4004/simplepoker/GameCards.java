@@ -101,6 +101,11 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 		return containsAll(heartsRoyalFlush) || containsAll(diamondsRoyalFlush)
 				|| containsAll(spadesRoyalFlush) || containsAll(clubsRoyalFlush);
 	}
+
+	public boolean isStraightFlush() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 	

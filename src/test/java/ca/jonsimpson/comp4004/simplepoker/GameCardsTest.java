@@ -65,4 +65,17 @@ public class GameCardsTest {
 		
 		assertTrue(royalFlushCards.isRoyalFlush());
 	}
+	
+	@Test
+	public void testIsStraightFlush() throws Exception {
+		// create straight flush
+		GameCards straightFlushCards = new GameCards();
+		straightFlushCards.add(new Card("2H"));
+		straightFlushCards.add(new Card("3H"));
+		straightFlushCards.add(new Card("4H"));
+		straightFlushCards.add(new Card("5H"));
+		straightFlushCards.add(new Card("6H"));
+		
+		assertTrue(straightFlushCards.isStraightFlush());
+	}
 }
