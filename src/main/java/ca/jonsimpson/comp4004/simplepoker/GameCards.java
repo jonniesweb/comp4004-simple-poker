@@ -62,7 +62,60 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 		return null;
 	}
 
+	/**
+	 * If the current cards are a straight from a ten to an ace with all five
+	 * cards of the same suit.
+	 * 
+	 * @return
+	 */
 	public boolean isRoyalFlush() {
-		throw new UnsupportedOperationException();
+		
+		GameCards heartsRoyalFlush = new GameCards();
+		heartsRoyalFlush.add(new Card("AH"));
+		heartsRoyalFlush.add(new Card("KH"));
+		heartsRoyalFlush.add(new Card("QH"));
+		heartsRoyalFlush.add(new Card("JH"));
+		heartsRoyalFlush.add(new Card("10H"));
+		
+		GameCards diamondsRoyalFlush = new GameCards();
+		diamondsRoyalFlush.add(new Card("AD"));
+		diamondsRoyalFlush.add(new Card("KD"));
+		diamondsRoyalFlush.add(new Card("QD"));
+		diamondsRoyalFlush.add(new Card("JD"));
+		diamondsRoyalFlush.add(new Card("10D"));
+		
+		GameCards spadesRoyalFlush = new GameCards();
+		spadesRoyalFlush.add(new Card("AS"));
+		spadesRoyalFlush.add(new Card("KS"));
+		spadesRoyalFlush.add(new Card("QS"));
+		spadesRoyalFlush.add(new Card("JS"));
+		spadesRoyalFlush.add(new Card("10S"));
+		
+		GameCards clubsRoyalFlush = new GameCards();
+		clubsRoyalFlush.add(new Card("AC"));
+		clubsRoyalFlush.add(new Card("KC"));
+		clubsRoyalFlush.add(new Card("QC"));
+		clubsRoyalFlush.add(new Card("JC"));
+		clubsRoyalFlush.add(new Card("10C"));
+		
+		return containsAll(heartsRoyalFlush) || containsAll(diamondsRoyalFlush)
+				|| containsAll(spadesRoyalFlush) || containsAll(clubsRoyalFlush);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
