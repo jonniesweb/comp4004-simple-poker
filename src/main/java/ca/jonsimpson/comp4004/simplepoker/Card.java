@@ -153,6 +153,11 @@ public class Card implements Comparable<Card> {
 		}
 		
 		// do the comparison of the indexes
-		return indexOfThisCard - indexOfCompareCard;
+		return indexOfCompareCard - indexOfThisCard;
+	}
+	
+	@Override
+	public String toString() {
+		return "Card " + rank + " " + suit;
 	}
 }
