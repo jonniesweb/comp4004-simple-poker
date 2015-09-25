@@ -2,10 +2,14 @@ package ca.jonsimpson.comp4004.simplepoker;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Test;
+
+import ca.jonsimpson.comp4004.simplepoker.Card.Rank;
 
 public class GameCardsTest {
 	
@@ -91,7 +95,30 @@ public class GameCardsTest {
 		assertTrue(highCards.isOnePair());
 	}
 	
-	
+	@Test
+	public void testGetCardsOfRank() throws Exception {
+		GameCards cards = new GameCards();
+		Card card3h = new Card("3H");
+		Card card4h = new Card("4H");
+		Card card6c = new Card("6C");
+		Card card6h = new Card("6H");
+		cards.add(card3h);
+		cards.add(card4h);
+		cards.add(card6c);
+		cards.add(card6h);
+		
+		List<Card> cardsOfRankSix = cards.getCardsOfRank(Rank.SIX);
+		assertEquals(2, cardsOfRankSix.size());
+		assertTrue(cardsOfRankSix.contains(card6c));
+		assertTrue(cardsOfRankSix.contains(card6h));
+		
+		List<Card> cardsOfRankFour = cards.getCardsOfRank(Rank.FOUR);
+		assertEquals(1, cardsOfRankFour.size());
+		assertTrue(cardsOfRankFour.contains(card4h));
+		
+		List<Card> cardsOfRankAce = cards.getCardsOfRank(Rank.ACE);
+		assertEquals(0, cardsOfRankAce.size());
+	}
 	
 	
 	
