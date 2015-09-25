@@ -2,9 +2,14 @@ package ca.jonsimpson.comp4004.simplepoker;
 
 import java.util.AbstractSet;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 import java.util.Set;
 
 import ca.jonsimpson.comp4004.simplepoker.Card.Rank;
@@ -110,25 +115,14 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 		
 	}
 	
-	private List<Card> getCardsOfRank(Rank rank) {
+	public List<Card> getCardsOfRank(Rank rank) {
 		// create return list
 		ArrayList<Card> result = new ArrayList<Card>(4);
 		
-		// create cards to compare to
-		Card heart = new Card(rank, Suit.HEART);
-		Card diamond = new Card(rank, Suit.DIAMOND);
-		Card club = new Card(rank, Suit.CLUB);
-		Card spade = new Card(rank, Suit.SPADE);
-		
-		// check if card exists in list, add to result if true
-		if (cards.contains(heart)) {
-			result.add(heart);
-		} else if (cards.contains(diamond)) {
-			result.add(diamond);
-		} else if (cards.contains(club)) {
-			result.add(club);
-		} else if (cards.contains(spade)) {
-			result.add(spade);
+		for (Card card : cards) {
+			if (card.getRank() == rank) {
+				result.add(card);
+			}
 		}
 		
 		// return the result
@@ -148,7 +142,7 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 		return compareCards;
 	}
 	
-	private List<Card> sortAndGroupCardsBySuit() {
+	private Map<Suit, List<Card>> sortAndGroupCardsBySuit() {
 		ArrayList<Card> heart = new ArrayList<Card>();
 		ArrayList<Card> diamond = new ArrayList<Card>();
 		ArrayList<Card> club = new ArrayList<Card>();
@@ -167,12 +161,34 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 			}
 		}
 		
-		// sort cards in each suit by greatest rank first
-		return null;
+		// sort the lists by highest rank first
+		Collections.sort(heart);
+		Collections.sort(diamond);
+		Collections.sort(club);
+		Collections.sort(spade);
+		
+		// put the lists into a map
+		EnumMap<Suit,List<Card>> map = new EnumMap<Suit, List<Card>>(Suit.class);
+		map.put(Suit.HEART, heart);
+		map.put(Suit.DIAMOND, diamond);
+		map.put(Suit.CLUB, club);
+		map.put(Suit.SPADE, spade);
+		
+		return map;
 	}
 
 	public boolean isOnePair() {
-		// TODO Auto-generated method stub
+		List<Rank> asList = Arrays.asList(Rank.values());
+		ListIterator<Rank> iterator = asList.listIterator();
+		
+		while (iterator.hasPrevious()) {
+			Rank rank = iterator.previous();
+			List<Card> cardsOfRank = getCardsOfRank(rank);
+			if (cardsOfRank.size() >= 2) {
+				return true;
+			}
+		}
+		
 		return false;
 	}
 	
