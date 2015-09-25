@@ -131,6 +131,28 @@ public class Card implements Comparable<Card> {
 	 */
 	@Override
 	public int compareTo(Card card) {
-		return 0;
+		if (card == null) {
+			throw new NullPointerException();
+		}
+		
+		int indexOfThisCard = -1;
+		int indexOfCompareCard = -1;
+		Rank[] ranks = Rank.values();
+		
+		// iterate over the cards, finding the index position of the ranks
+		for (int i = 0; i < ranks.length; i++) {
+			if (getRank() == ranks[i]) {
+				indexOfThisCard = i;
+			}
+			if (card.getRank() == ranks[i]) {
+				indexOfCompareCard = i;
+			}
+			if (indexOfThisCard != -1 && indexOfCompareCard != -1) {
+				break;
+			}
+		}
+		
+		// do the comparison of the indexes
+		return indexOfThisCard - indexOfCompareCard;
 	}
 }
