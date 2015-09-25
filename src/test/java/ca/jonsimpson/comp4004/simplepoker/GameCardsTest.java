@@ -78,4 +78,22 @@ public class GameCardsTest {
 		
 		assertTrue(straightFlushCards.isStraightFlush());
 	}
+	
+	@Test
+	public void testIsOnePair() throws Exception {
+		GameCards highCards = new GameCards();
+		highCards.add(new Card("2S"));
+		highCards.add(new Card("3H"));
+		highCards.add(new Card("4H"));
+		highCards.add(new Card("6C"));
+		highCards.add(new Card("6H"));
+		
+		assertTrue(highCards.isOnePair());
+	}
+	
+	
+	
+	
+	
+	
 }

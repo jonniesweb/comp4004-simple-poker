@@ -1,8 +1,10 @@
 package ca.jonsimpson.comp4004.simplepoker;
 
 import java.util.AbstractSet;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import ca.jonsimpson.comp4004.simplepoker.Card.Rank;
@@ -105,12 +107,74 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 	public boolean isStraightFlush() {
 		// TODO Auto-generated method stub
 		return false;
+		
 	}
 	
+	private List<Card> getCardsOfRank(Rank rank) {
+		// create return list
+		ArrayList<Card> result = new ArrayList<Card>(4);
+		
+		// create cards to compare to
+		Card heart = new Card(rank, Suit.HEART);
+		Card diamond = new Card(rank, Suit.DIAMOND);
+		Card club = new Card(rank, Suit.CLUB);
+		Card spade = new Card(rank, Suit.SPADE);
+		
+		// check if card exists in list, add to result if true
+		if (cards.contains(heart)) {
+			result.add(heart);
+		} else if (cards.contains(diamond)) {
+			result.add(diamond);
+		} else if (cards.contains(club)) {
+			result.add(club);
+		} else if (cards.contains(spade)) {
+			result.add(spade);
+		}
+		
+		// return the result
+		return result;
+	}
 	
+	private List<Card> getCardsOfSuit(Suit suit) {
+		// create cards to compare to
+		ArrayList<Card> compareCards = new ArrayList<Card>();
+		for (Rank rank : Rank.values()) {
+			compareCards.add(new Card(rank, suit));
+		}
+		
+		// keep all ranks that are in cards 
+		compareCards.retainAll(cards);
+		
+		return compareCards;
+	}
 	
-	
-	
+	private List<Card> sortAndGroupCardsBySuit() {
+		ArrayList<Card> heart = new ArrayList<Card>();
+		ArrayList<Card> diamond = new ArrayList<Card>();
+		ArrayList<Card> club = new ArrayList<Card>();
+		ArrayList<Card> spade = new ArrayList<Card>();
+		
+		// put cards into their lists by suit
+		for (Card card : cards) {
+			if (card.getSuit() == Suit.HEART) {
+				heart.add(card);
+			} else if (card.getSuit() == Suit.DIAMOND) {
+				diamond.add(card);
+			} else if (card.getSuit() == Suit.CLUB) {
+				club.add(card);
+			} else if (card.getSuit() == Suit.SPADE) {
+				spade.add(card);
+			}
+		}
+		
+		// sort cards in each suit by greatest rank first
+		return null;
+	}
+
+	public boolean isOnePair() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 	
