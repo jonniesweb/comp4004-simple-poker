@@ -2,6 +2,9 @@ package ca.jonsimpson.comp4004.simplepoker;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import org.junit.Test;
 
 import ca.jonsimpson.comp4004.simplepoker.Card;
@@ -71,13 +74,13 @@ public class CardTest {
 	@Test
 	public void testCompareRank() throws Exception {
 		// 2 < 4
-		assertTrue(0 > new Card("2H").compareTo(new Card("4D")));
+		assertTrue(0 < new Card("2H").compareTo(new Card("4D")));
 		
 		// cards of same rank but different suit are the same
 		assertEquals(0, new Card("4H").compareTo(new Card("4D")));
 		
 		// ace is high
-		assertTrue(0 < new Card("AH").compareTo(new Card("4D")));
+		assertTrue(0 > new Card("AH").compareTo(new Card("4D")));
 		
 		// same card
 		assertEquals(0, new Card("2D").compareTo(new Card("2D")));
@@ -86,5 +89,34 @@ public class CardTest {
 	@Test(expected = NullPointerException.class)
 	public void testCompareRankNPE() throws Exception {
 		new Card("4D").compareTo(null);
+	}
+	
+	@Test
+	public void testSortListOfCards() throws Exception {
+		// create cards
+		Card card2 = new Card("2H");
+		Card card3 = new Card("3H");
+		Card card5 = new Card("5H");
+		Card card6 = new Card("6H");
+		Card cardAce = new Card("AH");
+		
+		// add cards in unsorted order
+		ArrayList<Card> list = new ArrayList<Card>();
+		list.add(card2);
+		list.add(card6);
+		list.add(card3);
+		list.add(cardAce);
+		list.add(card5);
+		
+		// sort the cards
+		Collections.sort(list);
+		
+		// assert correct order
+		assertEquals(cardAce, list.get(0));
+		assertEquals(card6, list.get(1));
+		assertEquals(card5, list.get(2));
+		assertEquals(card3, list.get(3));
+		assertEquals(card2, list.get(4));
+		
 	}
 }
