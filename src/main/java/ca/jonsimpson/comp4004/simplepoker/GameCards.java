@@ -178,9 +178,10 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 	}
 
 	public boolean isOnePair() {
-		List<Rank> asList = Arrays.asList(Rank.values());
-		ListIterator<Rank> iterator = asList.listIterator();
+		List<Rank> ranks = Arrays.asList(Rank.values());
+		ListIterator<Rank> iterator = ranks.listIterator(ranks.size());
 		
+		// iterate over ranks in reverse order, highest card to lowest
 		while (iterator.hasPrevious()) {
 			Rank rank = iterator.previous();
 			List<Card> cardsOfRank = getCardsOfRank(rank);
