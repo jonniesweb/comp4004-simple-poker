@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Test;
 
 import ca.jonsimpson.comp4004.simplepoker.Card.Rank;
@@ -85,14 +86,40 @@ public class GameCardsTest {
 	
 	@Test
 	public void testIsOnePair() throws Exception {
-		GameCards highCards = new GameCards();
-		highCards.add(new Card("2S"));
-		highCards.add(new Card("3H"));
-		highCards.add(new Card("4H"));
-		highCards.add(new Card("6C"));
-		highCards.add(new Card("6H"));
+		GameCards cards = new GameCards();
+		cards.add(new Card("2S"));
+		cards.add(new Card("3H"));
+		cards.add(new Card("4H"));
+		cards.add(new Card("6C"));
+		cards.add(new Card("6H"));
 		
-		assertTrue(highCards.isOnePair());
+		assertNotNull(cards.isOnePair());
+		
+		// get the HandResult
+		HandResult handResult = cards.isOnePair();
+		
+		// assert that the match cards are the same
+		List<Card> winnerCards = Arrays.asList(new Card("6C"), new Card("6H"));
+		assertContainsSameElements(winnerCards, handResult.getMatchCards());
+		
+		// assert that the list from getHighCards() is in descending order of Rank
+		List<Card> leftoverHighCards = Arrays.asList(new Card("4H"), new Card("3H"), new Card("2S"));
+		assertContainsSameElements(leftoverHighCards, handResult.getHighCards());
+		
+		// check that all cards in the HandResult add up to 5
+		assertEquals(5, handResult.getMatchCards().size() + handResult.getHighCards().size());
+	}
+
+	/**
+	 * Each given list must have the same size and elements. Order does not
+	 * matter.
+	 * 
+	 * @param expected
+	 * @param actual
+	 */
+	private void assertContainsSameElements(List<Card> expected, List<Card> actual) {
+		assertEquals(expected.size(), actual.size());
+		assertTrue(expected.containsAll(actual));
 	}
 	
 	@Test

@@ -177,7 +177,7 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 		return map;
 	}
 
-	public boolean isOnePair() {
+	public HandResult isOnePair() {
 		List<Rank> ranks = Arrays.asList(Rank.values());
 		ListIterator<Rank> iterator = ranks.listIterator(ranks.size());
 		
@@ -186,11 +186,11 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 			Rank rank = iterator.previous();
 			List<Card> cardsOfRank = getCardsOfRank(rank);
 			if (cardsOfRank.size() >= 2) {
-				return true;
+				return null;
 			}
 		}
 		
-		return false;
+		return null;
 	}
 	
 	
