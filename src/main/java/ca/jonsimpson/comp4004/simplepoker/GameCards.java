@@ -177,6 +177,12 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 		return map;
 	}
 
+	/**
+	 * Checks if the cards contain one pair.
+	 * 
+	 * @return A {@link HandResult} object with the cards if the cards have a
+	 *         one pair, null if it does not
+	 */
 	public HandResult isOnePair() {
 		List<Rank> ranks = Arrays.asList(Rank.values());
 		ListIterator<Rank> iterator = ranks.listIterator(ranks.size());
@@ -186,7 +192,23 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 			Rank rank = iterator.previous();
 			List<Card> cardsOfRank = getCardsOfRank(rank);
 			if (cardsOfRank.size() >= 2) {
-				return null;
+				
+				// remove extra cards if there's more than two
+				if (cardsOfRank.size() > 2) {
+					cardsOfRank.subList(2, cardsOfRank.size()).clear();
+				}
+				
+				// create the HandResult
+				ArrayList<Card> highCards = new ArrayList<Card>(cards);
+				highCards.removeAll(cardsOfRank);
+				Collections.sort(highCards);
+				
+				// remove extra high cards if we have over 5 cards
+				if (highCards.size() > 3) {
+					highCards.subList(2, highCards.size()).clear();
+				}
+				
+				return new HandResult(cardsOfRank, highCards);
 			}
 		}
 		
