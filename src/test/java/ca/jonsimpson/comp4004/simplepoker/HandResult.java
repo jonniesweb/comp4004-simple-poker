@@ -23,6 +23,10 @@ public class HandResult {
 	}
 
 	public List<Card> getHighCards() {
-		return new UnmodifiableList<Card>(highCards);
+		if (highCards != null) {
+			return new UnmodifiableList<Card>(highCards);
+		} else {
+			return null;
+		}
 	}
 }

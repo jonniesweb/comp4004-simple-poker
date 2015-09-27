@@ -3,6 +3,7 @@ package ca.jonsimpson.comp4004.simplepoker;
 import java.util.AbstractSet;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashSet;
@@ -11,6 +12,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+
+import org.apache.commons.collections4.iterators.ReverseListIterator;
 
 import ca.jonsimpson.comp4004.simplepoker.Card.Rank;
 import ca.jonsimpson.comp4004.simplepoker.Card.Suit;
@@ -297,8 +300,97 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 	}
 
 	public HandResult isStraight() {
+		
+		List<Card> consecutiveCards = findLargestConsecutiveCards(cards);
+		if (consecutiveCards != null) {
+			return new HandResult(consecutiveCards, null);
+		}
 		return null;
 	}
+	
+	/**
+	 * Given a collection of cards, find the highest five cards that are
+	 * consecutive.
+	 * 
+	 * @param cards
+	 * @return
+	 */
+	private List<Card> findLargestConsecutiveCards(Collection<Card> allCards) {
+		
+		EnumMap<Rank, Card> rankMap = new EnumMap<Rank, Card>(Rank.class);
+		
+		// remove cards of the same rank
+		for (Card card : allCards) {
+			rankMap.put(card.getRank(), card);
+		}
+		List<Card> cards = new ArrayList<Card>(rankMap.values());
+		
+		// don't continue if there are less than five cards
+		if (cards.size() < 5) {
+			return null;
+		}
+		
+		Collections.sort(cards);
+		
+		ReverseListIterator<Rank> rankIterator = new ReverseListIterator<>(Arrays.asList(Rank.values()));
+		Iterator<Card> cardIterator = cards.iterator();
+		
+		ArrayList<Card> resultCards = new ArrayList<Card>();
+		Card c = cardIterator.next();
+		Rank r = rankIterator.next();
+		
+		while(true) {
+			System.out.println("r " + r + " c " + c.getRank());
+			if (r == c.getRank()) {
+				// we matched the ranks
+				resultCards.add(c);
+				
+				// if we have five consecutive cards, its a straight!
+				if (resultCards.size() >= 5) {
+					return resultCards;
+				}
+				
+				// advance both
+				if (cardIterator.hasNext() && rankIterator.hasNext()) {
+					c = cardIterator.next();
+					r = rankIterator.next();
+				} else {
+					break;
+				}
+				
+			} else {
+				// clear the results since the cards aren't consecutive
+				resultCards.clear();
+				
+				// advance the one with the highest rank
+				
+				if (r.compareTo(c.getRank()) > 0) {
+					if (rankIterator.hasNext()) {
+						r = rankIterator.next();
+						System.out.println("moving r");
+					} else {
+						break;
+					}
+					
+				} else {
+					if (cardIterator.hasNext()) {
+						c = cardIterator.next();
+						System.out.println("moving c");
+					} else {
+						break;
+					}
+				}
+			}
+		}
+		
+		
+		
+		return null;
+	}
+	
+	
+	
+	
 	
 	
 	
