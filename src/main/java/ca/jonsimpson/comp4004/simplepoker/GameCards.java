@@ -216,10 +216,52 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 	}
 
 	public HandResult isTwoPair() {
+		List<Rank> ranks = Arrays.asList(Rank.values());
+		ListIterator<Rank> iterator = ranks.listIterator(ranks.size());
+		
+		List<Card> matchedCards = new ArrayList<Card>();
+		
+		// iterate over ranks in reverse order, highest card to lowest
+		while (iterator.hasPrevious()) {
+			Rank rank = iterator.previous();
+			List<Card> cardsOfRank = getCardsOfRank(rank);
+			if (cardsOfRank.size() >= 2) {
+				
+				// remove extra cards if there's more than two
+				if (cardsOfRank.size() > 2) {
+					cardsOfRank.subList(2, cardsOfRank.size()).clear();
+				}
+				
+				// add the two matched cards to the matchedCards list
+				matchedCards.addAll(cardsOfRank);
+				
+				// check if we already have two pairs
+				if (matchedCards.size() >= 4) {
+					break;
+				}
+				
+			}
+		}
+		
+		if (matchedCards.size() >= 4) {
+			// get high cards
+			ArrayList<Card> highCards = new ArrayList<Card>(cards);
+			highCards.removeAll(matchedCards);
+			Collections.sort(highCards);
+			
+			// remove extra high cards if we have over 5 cards
+			if (highCards.size() > 1) {
+				highCards.subList(4, highCards.size()).clear();
+			}
+			
+			// create the HandResult
+			return new HandResult(matchedCards, highCards);
+			
+		}
+		
 		return null;
+		
 	}
-	
-	
 	
 	
 	
