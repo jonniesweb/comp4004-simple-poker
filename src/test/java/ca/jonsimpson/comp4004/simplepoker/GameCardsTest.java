@@ -186,5 +186,30 @@ public class GameCardsTest {
 		assertContainsSameElements(highCards, handResult.getHighCards());
 	}
 	
+	@Test
+	public void testThreeOfAKind() throws Exception {
+		GameCards cards = new GameCards();
+		Card cardah = new Card("AH");
+		Card cardas = new Card("AS");
+		Card cardad = new Card("AD");
+		Card card6c = new Card("6C");
+		Card card3h = new Card("3H");
+		cards.add(cardas);
+		cards.add(card6c);
+		cards.add(cardad);
+		cards.add(cardah);
+		cards.add(card3h);
+		
+		HandResult handResult = cards.isThreeOfAKind();
+		assertNotNull(handResult);
+		
+		
+		List<Card> matchedCards = Arrays.asList(cardah, cardad, cardas);
+		assertContainsSameElements(matchedCards, handResult.getMatchCards());
+		
+		List<Card> highCards = Arrays.asList(card6c, card3h);
+		assertContainsSameElements(highCards, handResult.getHighCards());
+	}
+	
 	
 }
