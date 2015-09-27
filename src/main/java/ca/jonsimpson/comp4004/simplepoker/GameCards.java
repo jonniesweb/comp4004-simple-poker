@@ -109,9 +109,9 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 				|| containsAll(spadesRoyalFlush) || containsAll(clubsRoyalFlush);
 	}
 
-	public boolean isStraightFlush() {
+	public HandResult isStraightFlush() {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 		
 	}
 	

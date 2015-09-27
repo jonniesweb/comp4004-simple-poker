@@ -75,13 +75,28 @@ public class GameCardsTest {
 	public void testIsStraightFlush() throws Exception {
 		// create straight flush
 		GameCards straightFlushCards = new GameCards();
-		straightFlushCards.add(new Card("2H"));
-		straightFlushCards.add(new Card("3H"));
-		straightFlushCards.add(new Card("4H"));
-		straightFlushCards.add(new Card("5H"));
-		straightFlushCards.add(new Card("6H"));
+		Card card2h = new Card("2H");
+		Card card3h = new Card("3H");
+		Card card4h = new Card("4H");
+		Card card5h = new Card("5H");
+		Card card6h = new Card("6H");
+		straightFlushCards.add(card2h);
+		straightFlushCards.add(card3h);
+		straightFlushCards.add(card4h);
+		straightFlushCards.add(card5h);
+		straightFlushCards.add(card6h);
 		
-		assertTrue(straightFlushCards.isStraightFlush());
+		assertNotNull(straightFlushCards.isStraightFlush());
+		
+		HandResult handResult = straightFlushCards.isStraightFlush();
+		
+		// verify that straight flush cards are matched
+		List<Card> correctCards = Arrays.asList(card2h, card3h, card4h, card5h, card6h);
+		assertContainsSameElements(correctCards, handResult.getMatchCards());
+		
+		// verify that there's no high cards
+		assertTrue(handResult.getHighCards().isEmpty());
+		
 	}
 	
 	@Test
