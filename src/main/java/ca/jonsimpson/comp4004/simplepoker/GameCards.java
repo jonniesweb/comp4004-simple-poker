@@ -295,6 +295,10 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 		
 		return null;
 	}
+
+	public HandResult isStraight() {
+		return null;
+	}
 	
 	
 	

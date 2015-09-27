@@ -211,5 +211,31 @@ public class GameCardsTest {
 		assertContainsSameElements(highCards, handResult.getHighCards());
 	}
 	
+	@Test
+	public void testStraight() throws Exception {
+		// create straight
+		GameCards straightCards = new GameCards();
+		Card card2s = new Card("2S");
+		Card card3c = new Card("3C");
+		Card card4h = new Card("4H");
+		Card card5d = new Card("5D");
+		Card card6h = new Card("6H");
+		straightCards.add(card6h);
+		straightCards.add(card4h);
+		straightCards.add(card3c);
+		straightCards.add(card2s);
+		straightCards.add(card5d);
+		
+		HandResult handResult = straightCards.isStraight();
+		assertNotNull(handResult);
+		
+		
+		// verify that straight cards are matched
+		List<Card> matchedCards = Arrays.asList(card2s, card3c, card4h, card5d, card6h);
+		assertContainsSameElements(matchedCards, handResult.getMatchCards());
+		
+		// verify that there's no high cards
+		assertNull(handResult.getHighCards());
+	}
 	
 }
