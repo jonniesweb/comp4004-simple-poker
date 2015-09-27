@@ -162,7 +162,29 @@ public class GameCardsTest {
 		assertEquals(0, cardsOfRankAce.size());
 	}
 	
-	
+	@Test
+	public void testIsTwoPair() throws Exception {
+		GameCards cards = new GameCards();
+		Card card2s = new Card("2S");
+		Card card2d = new Card("2D");
+		Card card4h = new Card("4H");
+		Card card6c = new Card("6C");
+		Card card6h = new Card("6H");
+		cards.add(card2d);
+		cards.add(card6c);
+		cards.add(card4h);
+		cards.add(card2s);
+		cards.add(card6h);
+		
+		HandResult handResult = cards.isTwoPair();
+		assertNotNull(handResult);
+		
+		List<Card> matchedCards = Arrays.asList(card6h, card6c, card2d, card2s);
+		assertContainsSameElements(matchedCards, handResult.getMatchCards());
+		
+		List<Card> highCards = Arrays.asList(card4h);
+		assertContainsSameElements(highCards, handResult.getHighCards());
+	}
 	
 	
 }

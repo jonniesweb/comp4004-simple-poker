@@ -214,6 +214,10 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 		
 		return null;
 	}
+
+	public HandResult isTwoPair() {
+		return null;
+	}
 	
 	
 	
