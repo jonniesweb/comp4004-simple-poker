@@ -238,4 +238,34 @@ public class GameCardsTest {
 		assertNull(handResult.getHighCards());
 	}
 	
+	@Test
+	public void testIsFlush() throws Exception {
+		// create flush
+		GameCards flushCards = new GameCards();
+		Card card2s = new Card("2S");
+		Card card7s = new Card("7S");
+		Card card4s = new Card("4S");
+		Card cardas = new Card("AS");
+		Card card6s = new Card("6S");
+		Card card3d = new Card("3D");
+		flushCards.add(card6s);
+		flushCards.add(card3d);
+		flushCards.add(card4s);
+		flushCards.add(card7s);
+		flushCards.add(card2s);
+		flushCards.add(cardas);
+		
+		HandResult handResult = flushCards.isFlush();
+		assertNotNull(handResult);
+		
+		// verify that the flush cards are matched
+		List<Card> matchedCards = Arrays.asList(card6s, card4s, card7s, card2s, cardas);
+		assertContainsSameElements(matchedCards, handResult.getMatchCards());
+		
+		// verify that there's no high cards
+		assertNull(handResult.getHighCards());
+		
+		
+	}
+	
 }
