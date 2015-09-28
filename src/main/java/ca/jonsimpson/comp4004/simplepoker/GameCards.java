@@ -24,7 +24,7 @@ import ca.jonsimpson.comp4004.simplepoker.HandResult.Hand;
  */
 public class GameCards extends AbstractSet<Card> implements Comparable<GameCards> {
 
-	Set<Card> cards = new HashSet<Card>();
+	private Set<Card> cards = new HashSet<Card>();
 	
 	@Override
 	public Iterator<Card> iterator() {
@@ -494,7 +494,85 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 
 	@Override
 	public int compareTo(GameCards otherCards) {
+		if (otherCards == null) {
+			throw new NullPointerException();
+		}
+		
+		Integer compareHands = compareHands(isRoyalFlush(), otherCards.isRoyalFlush());
+		if (compareHands != null) {
+			return compareHands;
+		}
+		
+		Integer straightFlush = compareHands(isStraightFlush(), otherCards.isStraightFlush());
+		if (straightFlush != null) {
+			return straightFlush;
+		}
+		
+		Integer fourKind = compareHands(isFourOfAKind(), otherCards.isFourOfAKind());
+		if (fourKind != null) {
+			return fourKind;
+		}
+		
+		Integer fullHouse = compareHands(isFullHouse(), otherCards.isFullHouse());
+		if (fullHouse != null) {
+			return fullHouse;
+		}
+		
+		Integer flush = compareHands(isFlush(), otherCards.isFlush());
+		if (flush != null) {
+			return flush;
+		}
+		
+		Integer straight = compareHands(isStraight(), otherCards.isStraight());
+		if (straight != null) {
+			return straight;
+		}
+		
+		Integer threeKind = compareHands(isThreeOfAKind(), otherCards.isThreeOfAKind());
+		if (threeKind != null) {
+			return threeKind;
+		}
+		
+		Integer twoPair = compareHands(isTwoPair(), otherCards.isTwoPair());
+		if (twoPair != null) {
+			return twoPair;
+		}
+		
+		Integer onePair = compareHands(isOnePair(), otherCards.isOnePair());
+		if (onePair != null) {
+			return onePair;
+		}
+		
+		Integer highCard = compareHands(isHighCard(), otherCards.isHighCard());
+		if (highCard != null) {
+			return highCard;
+		}
+		
 		return 0;
+	}
+
+	public HandResult isHighCard() {
+		return null;
+	}
+
+	/**
+	 * Compare two hands of the same type together. Returns 1 if thisResult is
+	 * the winner, 0 if there's no winner and -1 if otherResult is the winner.
+	 * 
+	 * @param thisResult
+	 * @param otherResult
+	 * @return
+	 */
+	private Integer compareHands(HandResult thisResult, HandResult otherResult) {
+		if (thisResult != null && otherResult != null) {
+			return thisResult.compareTo(otherResult);
+		} else if (thisResult != null) {
+			return 1;
+		} else if (otherResult != null) {
+			return -1;
+		} else {
+			return null;
+		}
 	}
 	
 	
