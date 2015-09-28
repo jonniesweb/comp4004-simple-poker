@@ -17,8 +17,22 @@ public class Card implements Comparable<Card> {
 		TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
 	};
 	
-	private final Suit suit;
-	private final Rank rank;
+	private static final String ace = "Ace";
+	private static final String two = "Two";
+	private static final String three = "Three";
+	private static final String four = "Four";
+	private static final String five = "Five";
+	private static final String six = "Six";
+	private static final String seven = "Seven";
+	private static final String eight = "Eight";
+	private static final String nine = "Nine";
+	private static final String ten = "Ten";
+	private static final String jack = "Jack";
+	private static final String queen = "Queen";
+	private static final String king = "King";
+	
+	private Suit suit;
+	private Rank rank;
 	
 	/**
 	 * @param rank
@@ -52,9 +66,29 @@ public class Card implements Comparable<Card> {
 		// check input if null and length if too short or too long
 		if (rankSuit == null) {
 			throw new NullPointerException("rankSuit cannot be null");
-		} else if (rankSuit.length() < 2 || rankSuit.length() > 3) {
+		} else if (rankSuit.length() < 2) {
 			throw new InvalidCardException("Invalid RankSuit format");
 		}
+		
+		/*
+		 * First method
+		 */
+		
+		String suitString = parseRank(rankSuit);
+		if (suitString != null) {
+			boolean success = parseSuit(suitString);
+			if (success) {
+				return;
+			} else {
+				rank = null;
+				suit = null;
+			}
+		}
+		
+		
+		/*
+		 * Second method
+		 */
 		
 		// grab the suit and rank out of the rankSuit String
 		char suit = rankSuit.charAt(rankSuit.length() - 1);
@@ -104,6 +138,69 @@ public class Card implements Comparable<Card> {
 			throw new InvalidCardException("Invalid rank specified: " + rank);
 		}
 		
+	}
+
+	private boolean parseSuit(String s) {
+		if ("Spades".equals(s)) {
+			suit = Suit.SPADE;
+			return true;
+		} else if ("Hearts".equals(s)) {
+			suit = Suit.HEART;
+			return true;
+		} else if ("Diamonds".equals(s)) {
+			suit = Suit.DIAMOND;
+			return true;
+		} else if ("Clubs".equals(s)) {
+			suit = Suit.CLUB;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private String parseRank(String s) {
+		if (s.startsWith(ace)) {
+			rank = Rank.ACE;
+			return s.substring(ace.length());
+		} else if (s.startsWith(two)) {
+			rank = Rank.TWO;
+			return s.substring(two.length());
+		} else if (s.startsWith(three)) {
+			rank = Rank.THREE;
+			return s.substring(three.length());
+		} else if (s.startsWith(four)) {
+			rank = Rank.FOUR;
+			return s.substring(four.length());
+		} else if (s.startsWith(five)) {
+			rank = Rank.FIVE;
+			return s.substring(five.length());
+		} else if (s.startsWith(six)) {
+			rank = Rank.SIX;
+			return s.substring(six.length());
+		} else if (s.startsWith(seven)) {
+			rank = Rank.SEVEN;
+			return s.substring(seven.length());
+		} else if (s.startsWith(eight)) {
+			rank = Rank.EIGHT;
+			return s.substring(eight.length());
+		} else if (s.startsWith(nine)) {
+			rank = Rank.NINE;
+			return s.substring(nine.length());
+		} else if (s.startsWith(ten)) {
+			rank = Rank.TEN;
+			return s.substring(ten.length());
+		} else if (s.startsWith(jack)) {
+			rank = Rank.JACK;
+			return s.substring(jack.length());
+		} else if (s.startsWith(queen)) {
+			rank = Rank.QUEEN;
+			return s.substring(queen.length());
+		} else if (s.startsWith(king)) {
+			rank = Rank.KING;
+			return s.substring(king.length());
+		} else {
+			return null;
+		}
 	}
 
 	@Override
