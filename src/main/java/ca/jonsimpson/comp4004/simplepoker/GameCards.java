@@ -410,7 +410,32 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 	}
 
 	public HandResult isFullHouse() {
-		return null;
+		// determine if the hand contains a three of a kind
+		HandResult threeOfAKind = isThreeOfAKind();
+		
+		// if three of a kind doesn't exist, full house is impossible
+		if (threeOfAKind == null) {
+			return null;
+		}
+		
+		// check if there's a pair
+		GameCards gameCards = new GameCards();
+		gameCards.addAll(cards);
+		gameCards.removeAll(threeOfAKind.getMatchCards());
+		HandResult onePair = gameCards.isOnePair();
+		
+		// if one pair doesn't exist, full house is impossible
+		if (onePair == null) {
+			return null;
+		}
+		
+		// create the HandResult from the three of a kind and one pair
+		ArrayList<Card> matchCards = new ArrayList<Card>();
+		matchCards.addAll(threeOfAKind.getMatchCards());
+		matchCards.addAll(onePair.getMatchCards());
+		
+		return new HandResult(matchCards, null);
+		
 	}
 	
 	
