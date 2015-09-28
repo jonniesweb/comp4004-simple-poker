@@ -344,4 +344,33 @@ public class GameCardsTest {
 		// verify that there's no high cards
 		assertNull(handResult.getHighCards());
 	}
+	
+	@Test
+	public void testCompareStraightToStraight() throws Exception {
+		GameCards winnerCards = new GameCards();
+		Card card2s = new Card("2S");
+		Card card3c = new Card("3C");
+		Card card4h = new Card("4H");
+		Card card5d = new Card("5D");
+		Card card6h = new Card("6H");
+		winnerCards.add(card6h);
+		winnerCards.add(card4h);
+		winnerCards.add(card3c);
+		winnerCards.add(card2s);
+		winnerCards.add(card5d);
+		
+		GameCards loserCards = new GameCards();
+		Card card5s = new Card("5S");
+		Card card6c = new Card("6C");
+		Card card7h = new Card("7H");
+		Card card8d = new Card("8D");
+		Card card9h = new Card("9H");
+		loserCards.add(card9h);
+		loserCards.add(card7h);
+		loserCards.add(card5s);
+		loserCards.add(card8d);
+		loserCards.add(card6c);
+		
+		assertEquals(1, winnerCards.compareTo(loserCards));
+	}
 }
