@@ -113,9 +113,26 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 	}
 
 	public HandResult isStraightFlush() {
-		// TODO Auto-generated method stub
-		return null;
+		// iterate over each suit, getting the cards of that suit
+		for (Suit suit : Suit.values()) {
+			List<Card> cards = getCardsOfSuit(suit);
+			
+			// fail fast if there are less than 5 cards
+			if (cards.size() >= 5) {
+				
+				// create a new GameCards object and determine if it is a straight
+				GameCards gameCards = new GameCards();
+				gameCards.addAll(cards);
+				
+				HandResult straightHandResult = gameCards.isStraight();
+				if (straightHandResult != null) {
+					// if it is a straight, return the HandResult
+					return straightHandResult;
+				}
+			}
+		}
 		
+		return null;
 	}
 	
 	public List<Card> getCardsOfRank(Rank rank) {
@@ -133,16 +150,15 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 	}
 	
 	private List<Card> getCardsOfSuit(Suit suit) {
-		// create cards to compare to
-		ArrayList<Card> compareCards = new ArrayList<Card>();
-		for (Rank rank : Rank.values()) {
-			compareCards.add(new Card(rank, suit));
+		
+		ArrayList<Card> resultCards = new ArrayList<Card>();
+		for (Card card : cards) {
+			if (card.getSuit() == suit) {
+				resultCards.add(card);
+			}
 		}
 		
-		// keep all ranks that are in cards 
-		compareCards.retainAll(cards);
-		
-		return compareCards;
+		return resultCards;
 	}
 	
 	private Map<Suit, List<Card>> sortAndGroupCardsBySuit() {
