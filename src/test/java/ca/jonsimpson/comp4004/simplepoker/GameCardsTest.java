@@ -38,23 +38,27 @@ public class GameCardsTest {
 	@Test
 	public void testCompareRoyalFlushToFlush() throws Exception {
 		// create a hand with a royal flush
-		GameCards winnerCards = new GameCards();
-		winnerCards.add(new Card("AH"));
-		winnerCards.add(new Card("KH"));
-		winnerCards.add(new Card("QH"));
-		winnerCards.add(new Card("JH"));
-		winnerCards.add(new Card("10H"));
+		GameCards royalFlushCards = new GameCards();
+		royalFlushCards.add(new Card("AH"));
+		royalFlushCards.add(new Card("KH"));
+		royalFlushCards.add(new Card("QH"));
+		royalFlushCards.add(new Card("JH"));
+		royalFlushCards.add(new Card("10H"));
+		
+		HandResult royalFlushHandResult = royalFlushCards.isRoyalFlush();
 		
 		// create a random hand
-		GameCards loserCards = new GameCards();
-		loserCards.add(new Card("2S"));
-		loserCards.add(new Card("3S"));
-		loserCards.add(new Card("4S"));
-		loserCards.add(new Card("5S"));
-		loserCards.add(new Card("10S"));
+		GameCards flushCards = new GameCards();
+		flushCards.add(new Card("2S"));
+		flushCards.add(new Card("3S"));
+		flushCards.add(new Card("4S"));
+		flushCards.add(new Card("5S"));
+		flushCards.add(new Card("10S"));
+		
+		HandResult flushHandResult = flushCards.isFlush();
 		
 		// do the comparison
-		assertEquals(1, winnerCards.compareTo(loserCards));
+		assertEquals(1, royalFlushHandResult.compareTo(flushHandResult));
 	}
 	
 	@Test

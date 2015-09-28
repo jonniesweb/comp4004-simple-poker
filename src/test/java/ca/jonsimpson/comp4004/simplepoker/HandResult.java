@@ -7,7 +7,7 @@ import org.apache.commons.collections4.list.UnmodifiableList;
 /**
  * A group of cards that make up the result of a users best hand.
  */
-public class HandResult {
+public class HandResult implements Comparable<HandResult> {
 
 	private final List<Card> matchCards;
 	private final List<Card> highCards;
@@ -28,5 +28,10 @@ public class HandResult {
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public int compareTo(HandResult paramT) {
+		return 0;
 	}
 }
