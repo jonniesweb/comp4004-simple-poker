@@ -437,6 +437,10 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 		return new HandResult(matchCards, null);
 		
 	}
+
+	public HandResult isFourOfAKind() {
+		return null;
+	}
 	
 	
 	

@@ -294,4 +294,31 @@ public class GameCardsTest {
 		// verify that there's no high cards
 		assertNull(handResult.getHighCards());
 	}
+	
+	@Test
+	public void testIsFourOfAKind() throws Exception {
+		// create full house
+		GameCards fourOfAKindCards = new GameCards();
+		Card card2s = new Card("2S");
+		Card card6d = new Card("6D");
+		Card cardah = new Card("AH");
+		Card cardas = new Card("AS");
+		Card cardad = new Card("AD");
+		Card cardac = new Card("AC");
+		fourOfAKindCards.add(cardad);
+		fourOfAKindCards.add(cardac);
+		fourOfAKindCards.add(cardah);
+		fourOfAKindCards.add(card6d);
+		fourOfAKindCards.add(card2s);
+		fourOfAKindCards.add(cardas);
+		
+		HandResult handResult = fourOfAKindCards.isFourOfAKind();
+		assertNotNull(handResult);
+		
+		List<Card> matchedCards = Arrays.asList(cardah, cardad, cardas, cardac);
+		assertContainsSameElements(matchedCards, handResult.getMatchCards());
+		
+		List<Card> highCards = Arrays.asList(card6d);
+		assertContainsSameElements(highCards, handResult.getHighCards());
+	}
 }
