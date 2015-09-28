@@ -157,6 +157,14 @@ public class Card implements Comparable<Card> {
 	}
 	
 	@Override
+	public int hashCode() {
+		int result = 37;
+		result = 37 * result + suit.hashCode();
+		result = 37 * result + rank.hashCode();
+		return result;
+	}
+	
+	@Override
 	public String toString() {
 		return "Card " + rank + " " + suit;
 	}
