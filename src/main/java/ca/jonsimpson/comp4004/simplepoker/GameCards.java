@@ -439,6 +439,36 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 	}
 
 	public HandResult isFourOfAKind() {
+		List<Rank> ranks = Arrays.asList(Rank.values());
+		ListIterator<Rank> iterator = ranks.listIterator(ranks.size());
+		
+		// iterate over ranks in reverse order, highest card to lowest
+		while (iterator.hasPrevious()) {
+			Rank rank = iterator.previous();
+			List<Card> cardsOfRank = getCardsOfRank(rank);
+			
+			if (cardsOfRank.size() >= 4) {
+				
+				// remove extra cards if there's more than four
+				if (cardsOfRank.size() > 4) {
+					cardsOfRank.subList(4, cardsOfRank.size()).clear();
+				}
+				
+				// get the high cards
+				ArrayList<Card> highCards = new ArrayList<Card>(cards);
+				highCards.removeAll(cardsOfRank);
+				Collections.sort(highCards);
+				
+				// remove extra high cards if we have over 5 cards
+				if (highCards.size() > 1) {
+					highCards.subList(1, highCards.size()).clear();
+				}
+				
+				return new HandResult(cardsOfRank, highCards);
+			}
+		}
+		
+		
 		return null;
 	}
 	
