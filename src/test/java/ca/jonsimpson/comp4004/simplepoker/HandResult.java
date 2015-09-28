@@ -1,5 +1,7 @@
 package ca.jonsimpson.comp4004.simplepoker;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.collections4.list.UnmodifiableList;
@@ -38,8 +40,38 @@ public class HandResult implements Comparable<HandResult> {
 	}
 
 	@Override
-	public int compareTo(HandResult paramT) {
+	public int compareTo(HandResult otherHand) {
+		if (otherHand == null) {
+			throw new NullPointerException();
+		}
+		
+		List<Card> cards = getAllCards();
+		List<Card> otherCards = otherHand.getAllCards();
+		
+		for (int i = 0; i < cards.size(); i++) {
+			Card card = cards.get(i);
+			Card card2 = otherCards.get(i);
+			int compareResult = card.getRank().compareTo(card2.getRank());
+			
+			if (compareResult <= 1) {
+				return 1;
+			} else if (compareResult >= 1) {
+				return -1;
+			}
+		}
+		
 		return 0;
+	}
+
+	private List<Card> getAllCards() {
+		ArrayList<Card> cards = new ArrayList<Card>();
+		cards.addAll(matchCards);
+		if (highCards != null) {
+			cards.addAll(highCards);
+		}
+		
+		Collections.sort(cards);
+		return cards;
 	}
 
 	public Hand getHand() {
