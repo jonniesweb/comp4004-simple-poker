@@ -17,6 +17,7 @@ import org.apache.commons.collections4.iterators.ReverseListIterator;
 
 import ca.jonsimpson.comp4004.simplepoker.Card.Rank;
 import ca.jonsimpson.comp4004.simplepoker.Card.Suit;
+import ca.jonsimpson.comp4004.simplepoker.HandResult.Hand;
 
 /**
  * A representation of a set of playing cards. Does not contain duplicate cards.
@@ -105,13 +106,13 @@ public class GameCards extends AbstractSet<Card> {
 			clubsRoyalFlush.add(new Card("10C"));
 			
 			if (cards.containsAll(heartsRoyalFlush)) {
-				return new HandResult(null, new ArrayList<Card>(heartsRoyalFlush.cards), null);
+				return new HandResult(Hand.ROYAL_FLUSH, new ArrayList<Card>(heartsRoyalFlush.cards), null);
 			} else if (cards.containsAll(diamondsRoyalFlush)) {
-				return new HandResult(null, new ArrayList<Card>(diamondsRoyalFlush.cards), null);
+				return new HandResult(Hand.ROYAL_FLUSH, new ArrayList<Card>(diamondsRoyalFlush.cards), null);
 			} else if (cards.containsAll(spadesRoyalFlush)) {
-				return new HandResult(null, new ArrayList<Card>(spadesRoyalFlush.cards), null);
+				return new HandResult(Hand.ROYAL_FLUSH, new ArrayList<Card>(spadesRoyalFlush.cards), null);
 			} else if (cards.containsAll(clubsRoyalFlush)) {
-				return new HandResult(null, new ArrayList<Card>(clubsRoyalFlush.cards), null);
+				return new HandResult(Hand.ROYAL_FLUSH, new ArrayList<Card>(clubsRoyalFlush.cards), null);
 			} 
 		}
 		
@@ -133,7 +134,7 @@ public class GameCards extends AbstractSet<Card> {
 				HandResult straightHandResult = gameCards.isStraight();
 				if (straightHandResult != null) {
 					// if it is a straight, return the HandResult
-					return straightHandResult;
+					return new HandResult(Hand.STRAIGHT_FLUSH, straightHandResult.getMatchCards(), null);
 				}
 			}
 		}
@@ -233,7 +234,7 @@ public class GameCards extends AbstractSet<Card> {
 					highCards.subList(2, highCards.size()).clear();
 				}
 				
-				return new HandResult(null, cardsOfRank, highCards);
+				return new HandResult(Hand.ONE_PAIR, cardsOfRank, highCards);
 			}
 		}
 		
@@ -280,7 +281,7 @@ public class GameCards extends AbstractSet<Card> {
 			}
 			
 			// create the HandResult
-			return new HandResult(null, matchedCards, highCards);
+			return new HandResult(Hand.TWO_PAIR, matchedCards, highCards);
 			
 		}
 		
@@ -314,7 +315,7 @@ public class GameCards extends AbstractSet<Card> {
 					highCards.subList(2, highCards.size()).clear();
 				}
 				
-				return new HandResult(null, cardsOfRank, highCards);
+				return new HandResult(Hand.THREE_KIND, cardsOfRank, highCards);
 			}
 		}
 		
@@ -325,7 +326,7 @@ public class GameCards extends AbstractSet<Card> {
 		
 		List<Card> consecutiveCards = findLargestConsecutiveCards(cards);
 		if (consecutiveCards != null) {
-			return new HandResult(null, consecutiveCards, null);
+			return new HandResult(Hand.STRAIGHT, consecutiveCards, null);
 		}
 		return null;
 	}
@@ -420,7 +421,7 @@ public class GameCards extends AbstractSet<Card> {
 					cards.subList(5, cards.size()).clear();
 				}
 				
-				return new HandResult(null, cards, null);
+				return new HandResult(Hand.FLUSH, cards, null);
 			}
 		}
 		
@@ -453,7 +454,7 @@ public class GameCards extends AbstractSet<Card> {
 		matchCards.addAll(threeOfAKind.getMatchCards());
 		matchCards.addAll(onePair.getMatchCards());
 		
-		return new HandResult(null, matchCards, null);
+		return new HandResult(Hand.FULL_HOUSE, matchCards, null);
 		
 	}
 
@@ -483,7 +484,7 @@ public class GameCards extends AbstractSet<Card> {
 					highCards.subList(1, highCards.size()).clear();
 				}
 				
-				return new HandResult(null, cardsOfRank, highCards);
+				return new HandResult(Hand.FOUR_KIND, cardsOfRank, highCards);
 			}
 		}
 		
