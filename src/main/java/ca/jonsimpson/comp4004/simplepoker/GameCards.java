@@ -367,7 +367,6 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 		Rank r = rankIterator.next();
 		
 		while(true) {
-			System.out.println("r " + r + " c " + c.getRank());
 			if (r == c.getRank()) {
 				// we matched the ranks
 				resultCards.add(c);
@@ -394,7 +393,6 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 				if (r.compareTo(c.getRank()) > 0) {
 					if (rankIterator.hasNext()) {
 						r = rankIterator.next();
-						System.out.println("moving r");
 					} else {
 						break;
 					}
@@ -402,7 +400,6 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 				} else {
 					if (cardIterator.hasNext()) {
 						c = cardIterator.next();
-						System.out.println("moving c");
 					} else {
 						break;
 					}
