@@ -552,7 +552,14 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 	}
 
 	public HandResult isHighCard() {
-		return null;
+		ArrayList<Card> cardList = new ArrayList<>(cards);
+		Collections.sort(cardList);
+		
+		if (cardList.size() >= 5) {
+			cardList.subList(5, cardList.size()).clear();
+		}
+		
+		return new HandResult(Hand.HIGH_CARD, cardList, null);
 	}
 
 	/**
