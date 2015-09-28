@@ -28,6 +28,7 @@ public class Game {
 				if (numPlayers >= 2 && numPlayers <= 4) {
 					playerCount = numPlayers;
 					state = State.ENTER_HANDS;
+					System.out.println("Please enter a hand for each player. Format is: <player id> <RankSuit>...");
 				}
 				
 			} else if (state == State.ENTER_HANDS) {
@@ -63,6 +64,10 @@ public class Game {
 			}
 		} catch (NumberFormatException e) {
 			System.out.println("Not a valid number");
+		} catch (InvalidCardException e) {
+			System.out.println("Invalid card entered");
+		} catch (Exception e) {
+			System.out.println("An problem occurred, try again");
 		}
 	}
 	
