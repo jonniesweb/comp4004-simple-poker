@@ -389,6 +389,23 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 	}
 
 	public HandResult isFlush() {
+		Map<Suit, List<Card>> cardsBySuit = sortAndGroupCardsBySuit();
+		
+		for (Suit suit : cardsBySuit.keySet()) {
+			List<Card> cards = cardsBySuit.get(suit);
+			
+			if (cards.size() >= 5) {
+				
+				// remove any cards greater than 5
+				if (cards.size() > 5) {
+					cards.subList(5, cards.size()).clear();
+				}
+				
+				return new HandResult(cards, null);
+			}
+		}
+		
+		// nothing found, return null
 		return null;
 	}
 	
