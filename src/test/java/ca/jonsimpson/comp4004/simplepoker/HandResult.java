@@ -9,10 +9,17 @@ import org.apache.commons.collections4.list.UnmodifiableList;
  */
 public class HandResult implements Comparable<HandResult> {
 
+	public enum Hand {
+		ROYAL_FLUSH, STRAIGHT_FLUSH, FOUR_KIND, FULL_HOUSE, FLUSH, STRAIGHT,
+		THREE_KIND, TWO_PAIR, ONE_PAIR, HIGH_CARD
+	};
+	
 	private final List<Card> matchCards;
 	private final List<Card> highCards;
+	private final Hand hand;
 
-	public HandResult(List<Card> matchCards, List<Card> highCards) {
+	public HandResult(Hand hand, List<Card> matchCards, List<Card> highCards) {
+		this.hand = hand;
 		this.matchCards = matchCards;
 		this.highCards = highCards;
 		
@@ -33,5 +40,9 @@ public class HandResult implements Comparable<HandResult> {
 	@Override
 	public int compareTo(HandResult paramT) {
 		return 0;
+	}
+
+	public Hand getHand() {
+		return hand;
 	}
 }

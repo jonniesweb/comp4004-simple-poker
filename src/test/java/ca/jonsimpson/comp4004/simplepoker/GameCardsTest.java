@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import ca.jonsimpson.comp4004.simplepoker.Card.Rank;
+import ca.jonsimpson.comp4004.simplepoker.HandResult.Hand;
 
 public class GameCardsTest {
 	
@@ -78,6 +78,7 @@ public class GameCardsTest {
 		
 		HandResult handResult = royalFlushCards.isRoyalFlush();
 		assertNotNull(handResult);
+		assertEquals(Hand.ROYAL_FLUSH, handResult.getHand());
 		
 		// verify that royal flush cards are matched
 		List<Card> matchedCards = Arrays.asList(card10h, cardjh, cardqh, cardkh, cardah);
@@ -103,9 +104,10 @@ public class GameCardsTest {
 		straightFlushCards.add(card5h);
 		straightFlushCards.add(card6h);
 		
-		assertNotNull(straightFlushCards.isStraightFlush());
 		
 		HandResult handResult = straightFlushCards.isStraightFlush();
+		assertNotNull(handResult);
+		assertEquals(Hand.STRAIGHT_FLUSH, handResult.getHand());
 		
 		// verify that straight flush cards are matched
 		List<Card> correctCards = Arrays.asList(card2h, card3h, card4h, card5h, card6h);
@@ -125,10 +127,11 @@ public class GameCardsTest {
 		cards.add(new Card("6C"));
 		cards.add(new Card("6H"));
 		
-		assertNotNull(cards.isOnePair());
 		
 		// get the HandResult
 		HandResult handResult = cards.isOnePair();
+		assertNotNull(handResult);
+		assertEquals(Hand.ONE_PAIR, handResult.getHand());
 		
 		// assert that the match cards are the same
 		List<Card> winnerCards = Arrays.asList(new Card("6C"), new Card("6H"));
@@ -170,6 +173,7 @@ public class GameCardsTest {
 		
 		HandResult handResult = cards.isTwoPair();
 		assertNotNull(handResult);
+		assertEquals(Hand.TWO_PAIR, handResult.getHand());
 		
 		List<Card> matchedCards = Arrays.asList(card6h, card6c, card2d, card2s);
 		assertContainsSameElements(matchedCards, handResult.getMatchCards());
@@ -194,7 +198,7 @@ public class GameCardsTest {
 		
 		HandResult handResult = cards.isThreeOfAKind();
 		assertNotNull(handResult);
-		
+		assertEquals(Hand.THREE_KIND, handResult.getHand());
 		
 		List<Card> matchedCards = Arrays.asList(cardah, cardad, cardas);
 		assertContainsSameElements(matchedCards, handResult.getMatchCards());
@@ -220,7 +224,7 @@ public class GameCardsTest {
 		
 		HandResult handResult = straightCards.isStraight();
 		assertNotNull(handResult);
-		
+		assertEquals(Hand.STRAIGHT, handResult.getHand());
 		
 		// verify that straight cards are matched
 		List<Card> matchedCards = Arrays.asList(card2s, card3c, card4h, card5d, card6h);
@@ -249,6 +253,7 @@ public class GameCardsTest {
 		
 		HandResult handResult = flushCards.isFlush();
 		assertNotNull(handResult);
+		assertEquals(Hand.FLUSH, handResult.getHand());
 		
 		// verify that the flush cards are matched
 		List<Card> matchedCards = Arrays.asList(card6s, card4s, card7s, card2s, cardas);
@@ -278,6 +283,7 @@ public class GameCardsTest {
 		
 		HandResult handResult = fullHouseCards.isFullHouse();
 		assertNotNull(handResult);
+		assertEquals(Hand.FULL_HOUSE, handResult.getHand());
 		
 		// verify full house cards are matched
 		List<Card> matchedCards = Arrays.asList(card2s, card2d, cardas, cardad, cardac);
@@ -306,6 +312,7 @@ public class GameCardsTest {
 		
 		HandResult handResult = fourOfAKindCards.isFourOfAKind();
 		assertNotNull(handResult);
+		assertEquals(Hand.FOUR_KIND, handResult.getHand());
 		
 		List<Card> matchedCards = Arrays.asList(cardah, cardad, cardas, cardac);
 		assertContainsSameElements(matchedCards, handResult.getMatchCards());

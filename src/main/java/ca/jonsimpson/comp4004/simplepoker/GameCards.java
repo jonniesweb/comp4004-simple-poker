@@ -105,13 +105,13 @@ public class GameCards extends AbstractSet<Card> {
 			clubsRoyalFlush.add(new Card("10C"));
 			
 			if (cards.containsAll(heartsRoyalFlush)) {
-				return new HandResult(new ArrayList<Card>(heartsRoyalFlush.cards), null);
+				return new HandResult(null, new ArrayList<Card>(heartsRoyalFlush.cards), null);
 			} else if (cards.containsAll(diamondsRoyalFlush)) {
-				return new HandResult(new ArrayList<Card>(diamondsRoyalFlush.cards), null);
+				return new HandResult(null, new ArrayList<Card>(diamondsRoyalFlush.cards), null);
 			} else if (cards.containsAll(spadesRoyalFlush)) {
-				return new HandResult(new ArrayList<Card>(spadesRoyalFlush.cards), null);
+				return new HandResult(null, new ArrayList<Card>(spadesRoyalFlush.cards), null);
 			} else if (cards.containsAll(clubsRoyalFlush)) {
-				return new HandResult(new ArrayList<Card>(clubsRoyalFlush.cards), null);
+				return new HandResult(null, new ArrayList<Card>(clubsRoyalFlush.cards), null);
 			} 
 		}
 		
@@ -233,7 +233,7 @@ public class GameCards extends AbstractSet<Card> {
 					highCards.subList(2, highCards.size()).clear();
 				}
 				
-				return new HandResult(cardsOfRank, highCards);
+				return new HandResult(null, cardsOfRank, highCards);
 			}
 		}
 		
@@ -280,7 +280,7 @@ public class GameCards extends AbstractSet<Card> {
 			}
 			
 			// create the HandResult
-			return new HandResult(matchedCards, highCards);
+			return new HandResult(null, matchedCards, highCards);
 			
 		}
 		
@@ -314,7 +314,7 @@ public class GameCards extends AbstractSet<Card> {
 					highCards.subList(2, highCards.size()).clear();
 				}
 				
-				return new HandResult(cardsOfRank, highCards);
+				return new HandResult(null, cardsOfRank, highCards);
 			}
 		}
 		
@@ -325,7 +325,7 @@ public class GameCards extends AbstractSet<Card> {
 		
 		List<Card> consecutiveCards = findLargestConsecutiveCards(cards);
 		if (consecutiveCards != null) {
-			return new HandResult(consecutiveCards, null);
+			return new HandResult(null, consecutiveCards, null);
 		}
 		return null;
 	}
@@ -420,7 +420,7 @@ public class GameCards extends AbstractSet<Card> {
 					cards.subList(5, cards.size()).clear();
 				}
 				
-				return new HandResult(cards, null);
+				return new HandResult(null, cards, null);
 			}
 		}
 		
@@ -453,7 +453,7 @@ public class GameCards extends AbstractSet<Card> {
 		matchCards.addAll(threeOfAKind.getMatchCards());
 		matchCards.addAll(onePair.getMatchCards());
 		
-		return new HandResult(matchCards, null);
+		return new HandResult(null, matchCards, null);
 		
 	}
 
@@ -483,7 +483,7 @@ public class GameCards extends AbstractSet<Card> {
 					highCards.subList(1, highCards.size()).clear();
 				}
 				
-				return new HandResult(cardsOfRank, highCards);
+				return new HandResult(null, cardsOfRank, highCards);
 			}
 		}
 		
