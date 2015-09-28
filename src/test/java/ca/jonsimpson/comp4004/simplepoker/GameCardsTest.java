@@ -264,8 +264,34 @@ public class GameCardsTest {
 		
 		// verify that there's no high cards
 		assertNull(handResult.getHighCards());
-		
-		
 	}
 	
+	
+	@Test
+	public void testIsFullHouse() throws Exception {
+		// create full house
+		GameCards fullHouseCards = new GameCards();
+		Card card2s = new Card("2S");
+		Card card2d = new Card("2D");
+		Card card4s = new Card("4S");
+		Card cardas = new Card("AS");
+		Card cardad = new Card("AD");
+		Card cardac = new Card("AC");
+		fullHouseCards.add(cardad);
+		fullHouseCards.add(cardac);
+		fullHouseCards.add(card4s);
+		fullHouseCards.add(card2d);
+		fullHouseCards.add(card2s);
+		fullHouseCards.add(cardas);
+		
+		HandResult handResult = fullHouseCards.isFullHouse();
+		assertNotNull(handResult);
+		
+		// verify full house cards are matched
+		List<Card> matchedCards = Arrays.asList(card2s, card2d, cardas, cardad, cardac);
+		assertContainsSameElements(matchedCards, handResult.getMatchCards());
+		
+		// verify that there's no high cards
+		assertNull(handResult.getHighCards());
+	}
 }

@@ -408,6 +408,10 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 		// nothing found, return null
 		return null;
 	}
+
+	public HandResult isFullHouse() {
+		return null;
+	}
 	
 	
 	
