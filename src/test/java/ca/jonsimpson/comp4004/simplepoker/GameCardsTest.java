@@ -95,7 +95,7 @@ public class GameCardsTest {
 		assertContainsSameElements(correctCards, handResult.getMatchCards());
 		
 		// verify that there's no high cards
-		assertTrue(handResult.getHighCards().isEmpty());
+		assertNull(handResult.getHighCards());
 		
 	}
 	
