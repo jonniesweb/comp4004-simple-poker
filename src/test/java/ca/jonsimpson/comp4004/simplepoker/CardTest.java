@@ -54,6 +54,9 @@ public class CardTest {
 		assertEquals(new Card("QH"), new Card(Rank.QUEEN, Suit.HEART));
 		assertEquals(new Card("KD"), new Card(Rank.KING, Suit.DIAMOND));
 		assertEquals(new Card("AS"), new Card(Rank.ACE, Suit.SPADE));
+		
+		assertEquals(new Card("AceSpades"), new Card(Rank.ACE, Suit.SPADE));
+		assertEquals(new Card("TwoHearts"), new Card(Rank.TWO, Suit.HEART));
 	}
 	
 	@Test(expected = NullPointerException.class)
