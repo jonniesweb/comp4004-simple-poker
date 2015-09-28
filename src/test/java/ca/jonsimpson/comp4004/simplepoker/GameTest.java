@@ -16,9 +16,9 @@ public class GameTest {
 		g.processLine("2");
 		
 		// enter each players hand
-		g.processLine("1 AceSpades AceHearts AceDiamonds AceClubs TwoDiamonds");
 		g.processLine("2 TenSpades TenHearts TenDiamonds TenClubs TwoSpades");
+		g.processLine("1 AceSpades AceHearts AceDiamonds AceClubs TwoDiamonds");
 		
-		assertEquals(Arrays.asList("1", "2"), g.getScores());
+		assertEquals(Arrays.asList(1, 2), g.getScores());
 	}
 }
