@@ -45,8 +45,6 @@ public class GameCardsTest {
 		royalFlushCards.add(new Card("JH"));
 		royalFlushCards.add(new Card("10H"));
 		
-		HandResult royalFlushHandResult = royalFlushCards.isRoyalFlush();
-		
 		// create a random hand
 		GameCards flushCards = new GameCards();
 		flushCards.add(new Card("2S"));
@@ -55,10 +53,8 @@ public class GameCardsTest {
 		flushCards.add(new Card("5S"));
 		flushCards.add(new Card("10S"));
 		
-		HandResult flushHandResult = flushCards.isFlush();
-		
 		// do the comparison
-		assertEquals(1, royalFlushHandResult.compareTo(flushHandResult));
+		assertEquals(1, royalFlushCards.compareTo(flushCards));
 	}
 	
 	@Test

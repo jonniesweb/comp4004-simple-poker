@@ -22,7 +22,7 @@ import ca.jonsimpson.comp4004.simplepoker.HandResult.Hand;
 /**
  * A representation of a set of playing cards. Does not contain duplicate cards.
  */
-public class GameCards extends AbstractSet<Card> {
+public class GameCards extends AbstractSet<Card> implements Comparable<GameCards> {
 
 	Set<Card> cards = new HashSet<Card>();
 	
@@ -490,6 +490,11 @@ public class GameCards extends AbstractSet<Card> {
 		
 		
 		return null;
+	}
+
+	@Override
+	public int compareTo(GameCards otherCards) {
+		return 0;
 	}
 	
 	
