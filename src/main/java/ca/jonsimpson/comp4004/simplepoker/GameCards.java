@@ -78,7 +78,7 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 	 * 
 	 * @return
 	 */
-	public boolean isRoyalFlush() {
+	public HandResult isRoyalFlush() {
 		
 		GameCards heartsRoyalFlush = new GameCards();
 		heartsRoyalFlush.add(new Card("AH"));
@@ -108,8 +108,7 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 		clubsRoyalFlush.add(new Card("JC"));
 		clubsRoyalFlush.add(new Card("10C"));
 		
-		return containsAll(heartsRoyalFlush) || containsAll(diamondsRoyalFlush)
-				|| containsAll(spadesRoyalFlush) || containsAll(clubsRoyalFlush);
+		return null;
 	}
 
 	public HandResult isStraightFlush() {

@@ -62,13 +62,27 @@ public class GameCardsTest {
 	public void testIsRoyalFlush() throws Exception {
 		// create royal flush
 		GameCards royalFlushCards = new GameCards();
-		royalFlushCards.add(new Card("AH"));
-		royalFlushCards.add(new Card("KH"));
-		royalFlushCards.add(new Card("QH"));
-		royalFlushCards.add(new Card("JH"));
-		royalFlushCards.add(new Card("10H"));
+		Card card10h = new Card("10H");
+		Card cardjh = new Card("JH");
+		Card cardqh = new Card("QH");
+		Card cardkh = new Card("KH");
+		Card cardah = new Card("AH");
+		royalFlushCards.add(card10h);
+		royalFlushCards.add(cardah);
+		royalFlushCards.add(cardjh);
+		royalFlushCards.add(cardkh);
+		royalFlushCards.add(cardqh);
 		
-		assertTrue(royalFlushCards.isRoyalFlush());
+		HandResult handResult = royalFlushCards.isRoyalFlush();
+		assertNotNull(handResult);
+		
+		// verify that royal flush cards are matched
+		List<Card> matchedCards = Arrays.asList(card10h, cardjh, cardqh, cardkh, cardah);
+		assertContainsSameElements(matchedCards, handResult.getMatchCards());
+		
+		// verify that there's no high cards
+		assertNull(handResult.getHighCards());
+		
 	}
 	
 	@Test
