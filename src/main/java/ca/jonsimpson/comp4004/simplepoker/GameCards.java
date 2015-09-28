@@ -146,7 +146,7 @@ public class GameCards extends AbstractSet<Card> implements Comparable<GameCards
 		return null;
 	}
 	
-	public List<Card> getCardsOfRank(Rank rank) {
+	private List<Card> getCardsOfRank(Rank rank) {
 		// create return list
 		ArrayList<Card> result = new ArrayList<Card>(4);
 		
